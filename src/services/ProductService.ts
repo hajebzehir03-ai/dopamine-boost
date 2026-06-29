@@ -3,28 +3,36 @@ import { API_CONFIG } from '@/config/api'
 import { discountedPrice } from '@/utils/formatters'
 
 function normalizeFakeStore(raw: Record<string, unknown>): Product {
+  const price = typeof raw.price === 'number' ? raw.price : parseFloat(String(raw.price)) || 0
+  const rating = (raw.rating && typeof raw.rating === 'object') ? raw.rating as { rate: number; count: number } : { rate: 0, count: 0 }
   return {
     id: raw.id as number,
-    title: raw.title as string,
-    price: parseFloat(((raw.price as number) * 0.95).toFixed(2)),
-    description: raw.description as string,
-    category: raw.category as string,
-    image: raw.image as string,
-    rating: raw.rating as { rate: number; count: number },
+    title: String(raw.title ?? 'Prodotto senza nome'),
+    price: parseFloat((price * 0.95).toFixed(2)),
+    description: String(raw.description ?? ''),
+    category: String(raw.category ?? 'altro'),
+    image: typeof raw.image === 'string' && raw.image.startsWith('http') ? raw.image : '',
+    rating,
     source: 'fakestoreapi',
   }
 }
 
 function normalizeDummyJSON(raw: Record<string, unknown>): Product {
-  const images = (raw.images as string[]) || []
+  const images = Array.isArray(raw.images) ? (raw.images as string[]) : []
+  const price = typeof raw.price === 'number' ? raw.price : parseFloat(String(raw.price)) || 0
+  const thumbnail = typeof raw.thumbnail === 'string' && raw.thumbnail.startsWith('http') ? raw.thumbnail : ''
+  const fallbackImg = typeof images[0] === 'string' && images[0].startsWith('http') ? images[0] : ''
   return {
-    id: (raw.id as number) + 1000,
-    title: raw.title as string,
-    price: parseFloat(((raw.price as number) * 0.92).toFixed(2)),
-    description: raw.description as string,
-    category: (raw.category as string) || 'altro',
-    image: (raw.thumbnail as string) || images[0] || '',
-    rating: { rate: raw.rating as number, count: raw.stock as number },
+    id: (typeof raw.id === 'number' ? raw.id : 0) + 1000,
+    title: String(raw.title ?? 'Prodotto senza nome'),
+    price: parseFloat((price * 0.92).toFixed(2)),
+    description: String(raw.description ?? ''),
+    category: String(raw.category ?? 'altro'),
+    image: thumbnail || fallbackImg,
+    rating: {
+      rate: typeof raw.rating === 'number' ? raw.rating : 0,
+      count: typeof raw.stock === 'number' ? raw.stock : 0,
+    },
     source: 'dummyjson',
   }
 }
@@ -67,7 +75,9 @@ class ProductServiceClass {
 
   private async getDummyJSON(): Promise<Product[]> {
     const res = await fetch(API_CONFIG.dummyjson.baseUrl + API_CONFIG.dummyjson.endpoints.products)
-    const data = await res.json() as { products: Record<string, unknown>[] }
+    if (!res.ok) throw new Error(`DummyJSON error: ${res.status}`)
+    const data = await res.json() as { products?: Record<string, unknown>[] }
+    if (!Array.isArray(data.products)) throw new Error('DummyJSON: formato risposta non valido')
     const products = data.products.map(normalizeDummyJSON)
     this.cache = injectFlashSales(products)
     return this.cache

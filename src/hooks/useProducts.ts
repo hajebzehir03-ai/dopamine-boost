@@ -41,10 +41,14 @@ export function useProduct(id: number) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let cancelled = false
     setLoading(true)
-    ProductService.getById(id)
-      .then(setProduct)
-      .finally(() => setLoading(false))
+    ProductService.getById(id).then((p) => {
+      if (!cancelled) setProduct(p)
+    }).finally(() => {
+      if (!cancelled) setLoading(false)
+    })
+    return () => { cancelled = true }
   }, [id])
 
   return { product, loading }

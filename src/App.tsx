@@ -30,6 +30,13 @@ export function App() {
           <Route path="/ordini" element={<OrdersPage />} />
           <Route path="/tracking/:id" element={<TrackingPage />} />
           <Route path="/profilo" element={<SettingsPage />} />
+          <Route path="*" element={
+            <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-6 text-center">
+              <p className="text-5xl">🛒</p>
+              <p className="font-bold text-[var(--color-text)] text-xl">Pagina non trovata</p>
+              <a href="/" className="text-sm text-[var(--color-primary)] underline">Torna allo shopping →</a>
+            </div>
+          } />
         </Routes>
       </AnimatePresence>
 

@@ -55,3 +55,12 @@ GoogleService-Info.plist
 .cache/
 .temp/
 *.local
+
+# Self-eval scores (local dev tracking)
+.self-eval-scores.jsonl
+
+# Netlify local
+.netlify/
+
+# Claude Code scratchpad / plan files
+*.claude-plan

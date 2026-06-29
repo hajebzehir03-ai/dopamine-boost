@@ -42,13 +42,13 @@ function useTypewriter(text: string, delay = 80) {
   return { displayed, done }
 }
 
+const CONFETTI_COLORS = ['#FF2060', '#FFDE07', '#FF6B00', '#00C853', '#2196F3', '#E91E63']
+
 export function OrderConfirmation({ order }: OrderConfirmationProps) {
   const navigate = useNavigate()
   const [particles, setParticles] = useState<Particle[]>([])
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const { displayed: orderIdTyped, done: typingDone } = useTypewriter(order.id, 80)
-
-  const CONFETTI_COLORS = ['#FF2060', '#FFDE07', '#FF6B00', '#00C853', '#2196F3', '#E91E63']
 
   useEffect(() => {
     const newParticles: Particle[] = Array.from({ length: 120 }, (_, i) => ({
@@ -65,10 +65,16 @@ export function OrderConfirmation({ order }: OrderConfirmationProps) {
 
     if ('vibrate' in navigator) navigator.vibrate([100, 50, 100, 50, 200])
 
-    audioRef.current = new Audio('/sounds/kaching.mp3')
-    audioRef.current.play().catch(() => {})
+    const audio = new Audio('/sounds/kaching.mp3')
+    audioRef.current = audio
+    audio.play().catch(() => { /* autoplay blocked by browser — non-critical */ })
 
-    return () => setParticles([])
+    return () => {
+      audio.pause()
+      audio.src = ''
+      audioRef.current = null
+      setParticles([])
+    }
   }, [])
 
   return (

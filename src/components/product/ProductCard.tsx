@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { Product } from '@/types/product'
@@ -18,12 +18,15 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { themeName } = useThemeStore()
   const [adding, setAdding] = useState(false)
   const inCart = isInCart(product.id)
+  const addingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => () => { if (addingTimerRef.current) clearTimeout(addingTimerRef.current) }, [])
 
   const handleAdd = (e: React.MouseEvent) => {
     e.stopPropagation()
     setAdding(true)
     add(product)
-    setTimeout(() => setAdding(false), 600)
+    addingTimerRef.current = setTimeout(() => setAdding(false), 600)
   }
 
   const stars = '⭐'.repeat(Math.round(product.rating.rate))

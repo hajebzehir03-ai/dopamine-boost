@@ -36,8 +36,8 @@ export const useBudgetStore = create<BudgetStore>()(
       },
 
       percentUsed: () => {
-        get().checkAndReset()
-        return ((DAILY_BUDGET - get().remaining) / DAILY_BUDGET) * 100
+        const remaining = get().remaining
+        return ((DAILY_BUDGET - remaining) / DAILY_BUDGET) * 100
       },
     }),
     { name: 'cartrush-budget' }

@@ -27,6 +27,10 @@ export function CheckoutForm({ address, shipping, onAddressChange, onShippingCha
     <div className="space-y-5">
       <div>
         <h3 className="font-bold text-[var(--color-text)] mb-3">📍 Indirizzo di spedizione</h3>
+        <p className="text-xs text-[var(--color-text-muted)] mb-3">
+          🔒 I dati che inserisci restano solo su questo dispositivo — non vengono mai inviati a nessun server.
+          Usa pure un nome e un indirizzo di fantasia!
+        </p>
         <div className="grid grid-cols-2 gap-3">
           <input placeholder="Nome" value={address.nome} onChange={field('nome')} className={inputClass} />
           <input placeholder="Cognome" value={address.cognome} onChange={field('cognome')} className={inputClass} />
