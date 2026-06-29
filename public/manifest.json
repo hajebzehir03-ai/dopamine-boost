@@ -1,0 +1,19 @@
+{
+  "name": "CartRush",
+  "short_name": "CartRush",
+  "description": "La scarica di adrenalina dello shopping, senza spendere un centesimo.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FF2060",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "entertainment"]
+}
