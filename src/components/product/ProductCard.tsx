@@ -12,7 +12,7 @@ interface ProductCardProps {
   index?: number
 }
 
-export function ProductCard({ product, index = 0 }: ProductCardProps) {
+export function ProductCard({ product }: ProductCardProps) {
   const navigate = useNavigate()
   const { add, isInCart } = useCart()
   const { themeName } = useThemeStore()
@@ -33,9 +33,6 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.3 }}
       whileHover={{ y: -2 }}
       onClick={() => navigate(`/prodotto/${product.id}`)}
       className="card cursor-pointer overflow-hidden group"

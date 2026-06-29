@@ -15,23 +15,26 @@ export function useProducts() {
   const [error, setError] = useState<string | null>(null)
   const [filters, setFilters] = useState<ProductFilters>(defaultFilters)
   const hasLoadedOnce = useRef(false)
+  const requestIdRef = useRef(0)
 
   const load = useCallback(async () => {
-    // Only show skeleton on the very first load — subsequent filter changes
-    // keep showing current products to avoid image flicker
+    const requestId = ++requestIdRef.current
     if (!hasLoadedOnce.current) setLoading(true)
     setError(null)
     try {
       const filtered = await ProductService.filter(filters)
+      // Discard stale responses — only apply the most recent request
+      if (requestId !== requestIdRef.current) return
       hasLoadedOnce.current = true
       setProducts(filtered)
       if (filters.category === 'tutti' && !filters.search) {
         setFlashSales(ProductService.getFlashSales(filtered))
       }
     } catch {
+      if (requestId !== requestIdRef.current) return
       setError('Impossibile caricare i prodotti. Riprova.')
     } finally {
-      setLoading(false)
+      if (requestId === requestIdRef.current) setLoading(false)
     }
   }, [filters])
 
