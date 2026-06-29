@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 interface SearchBarProps {
   value: string
@@ -8,11 +8,13 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChange, placeholder = 'Cerca prodotti…' }: SearchBarProps) {
   const [local, setLocal] = useState(value)
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
 
   useEffect(() => {
-    const t = setTimeout(() => onChange(local), 350)
+    const t = setTimeout(() => onChangeRef.current(local), 350)
     return () => clearTimeout(t)
-  }, [local, onChange])
+  }, [local])
 
   return (
     <div className="relative">
