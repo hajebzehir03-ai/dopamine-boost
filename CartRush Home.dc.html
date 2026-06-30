@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  body { background: #c9ccd2; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Archivo', sans-serif; }
+  .scroll::-webkit-scrollbar { display: none; }
+  .scroll { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
+</helmet>
+
+<div style="position: relative; width: 393px; height: 852px; background: #ffffff; border-radius: 54px; box-shadow: 0 40px 90px rgba(0,0,0,.35), 0 0 0 11px #1b1c20, 0 0 0 13px #2c2e34; overflow: hidden; font-family: 'Archivo', sans-serif; color: #15161a;">
+
+  <!-- Dynamic Island -->
+  <div style="position: absolute; top: 11px; left: 50%; transform: translateX(-50%); width: 124px; height: 35px; background: #000; border-radius: 20px; z-index: 50;"></div>
+
+  <!-- Status bar -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 30px 9px; z-index: 40;">
+    <div style="font-size: 15px; font-weight: 700; letter-spacing: .3px;">9:41</div>
+    <div style="display: flex; align-items: center; gap: 7px;">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="1" fill="#15161a"/><rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#15161a"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#15161a"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#15161a" opacity=".35"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 2.5c2.3 0 4.4.9 6 2.4l1.2-1.3C13.8 1.7 11.3.7 8.5.7S3.2 1.7 1.3 3.6L2.5 4.9c1.6-1.5 3.7-2.4 6-2.4z" fill="#15161a"/><path d="M8.5 6c1.2 0 2.4.5 3.2 1.3l1.2-1.3C11.8 4.8 10.2 4.1 8.5 4.1S5.2 4.8 4.1 6l1.2 1.3C6.1 6.5 7.3 6 8.5 6z" fill="#15161a"/><circle cx="8.5" cy="9.8" r="1.6" fill="#15161a"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#15161a" stroke-opacity=".4"/><rect x="2" y="2" width="16.5" height="8" rx="1.5" fill="#15161a"/><rect x="23" y="4" width="1.5" height="4" rx=".75" fill="#15161a" fill-opacity=".4"/></svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div style="position: absolute; top: 54px; left: 0; right: 0; padding: 6px 18px 8px; display: flex; align-items: center; justify-content: space-between; background: #fff; z-index: 30;">
+    <div style="font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 27px; letter-spacing: -.5px;">CartRush<span style="color: #FF2060;">.</span></div>
+    <div style="display: flex; align-items: center; gap: 4px; background: linear-gradient(135deg, #FF2060, #FF7A1A); padding: 4px 10px 4px 8px; border-radius: 20px; box-shadow: 0 4px 10px rgba(255,32,96,.3);">
+      <svg width="13" height="15" viewBox="0 0 13 15" fill="none"><path d="M6.5 0C6.5 0 8.8 2.6 8.8 5.2c0 .7-.3 1.3-.8 1.7.3-1 .1-2.2-.6-3C7 5.6 6 6.6 5.4 7.7c-.5.9-.9 2-.9 3 0 .6.2 1.1.5 1.5C3.2 11.8 2 10.1 2 8.2c0-2.4 1.8-4 2.8-5.6C5.6 1.4 6.5 0 6.5 0z" fill="#fff"/></svg>
+      <span style="color: #fff; font-weight: 800; font-size: 14px;">3</span>
+    </div>
+  </div>
+
+  <!-- Budget bar -->
+  <div style="position: absolute; top: 100px; left: 0; right: 0; padding: 0 18px 8px; background: #fff; z-index: 30;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px;">
+      <span style="font-size: 11px; font-weight: 600; color: #8a8d95; letter-spacing: .2px;">Budget mensile</span>
+      <span style="font-family: 'Archivo Narrow', sans-serif; font-size: 13px; font-weight: 700;"><span style="color: #FF2060;">327€</span> rimasti</span>
+    </div>
+    <div style="height: 6px; background: #eceef1; border-radius: 4px; overflow: hidden;">
+      <div style="width: 65%; height: 100%; background: linear-gradient(90deg, #FF2060, #FF7A1A); border-radius: 4px;"></div>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div style="position: absolute; top: 135px; left: 0; right: 0; padding: 4px 18px 10px; background: #fff; z-index: 30; box-shadow: 0 6px 14px rgba(0,0,0,.03);">
+    <div style="display: flex; align-items: center; gap: 9px; background: #f1f2f4; border-radius: 13px; padding: 11px 14px;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.3" stroke="#9a9da4" stroke-width="1.7"/><path d="M11 11l3.2 3.2" stroke="#9a9da4" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <span style="font-size: 14px; color: #9a9da4; font-weight: 500;">Cerca prodotti...</span>
+    </div>
+  </div>
+
+  <!-- SCROLL AREA -->
+  <div class="scroll" style="position: absolute; top: 197px; left: 0; right: 0; bottom: 76px; overflow-y: auto; background: #fff;">
+
+    <!-- Flash sale banner -->
+    <div style="margin: 6px 18px 14px; border-radius: 18px; background: linear-gradient(120deg, #FF1668 0%, #FF3D5A 45%, #FF7A1A 100%); padding: 14px; position: relative; overflow: hidden; box-shadow: 0 12px 24px rgba(255,40,90,.28);">
+      <div style="position: absolute; top: -30px; right: -20px; width: 110px; height: 110px; background: rgba(255,255,255,.12); border-radius: 50%;"></div>
+      <div style="position: absolute; top: 12px; right: 12px; background: #fff; color: #FF2060; font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 16px; padding: 3px 9px; border-radius: 8px;">-70%</div>
+      <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 9px;">
+        <svg width="15" height="17" viewBox="0 0 13 15" fill="none"><path d="M6.5 0C6.5 0 8.8 2.6 8.8 5.2c0 .7-.3 1.3-.8 1.7.3-1 .1-2.2-.6-3C7 5.6 6 6.6 5.4 7.7c-.5.9-.9 2-.9 3 0 .6.2 1.1.5 1.5C3.2 11.8 2 10.1 2 8.2c0-2.4 1.8-4 2.8-5.6C5.6 1.4 6.5 0 6.5 0z" fill="#fff"/></svg>
+        <span style="color: #fff; font-weight: 800; font-size: 16px; letter-spacing: .3px;">FLASH SALE</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+        <span style="color: rgba(255,255,255,.85); font-size: 11px; font-weight: 600;">Finisce tra</span>
+        <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 16px; color: #fff; background: rgba(0,0,0,.18); padding: 3px 9px; border-radius: 7px; letter-spacing: 1px;">00:47:23</span>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <div style="flex: 1; aspect-ratio: 1; background: rgba(255,255,255,.92); border-radius: 11px; background-image: repeating-linear-gradient(45deg, #f3f3f5 0 6px, #eaeaee 6px 12px);"></div>
+        <div style="flex: 1; aspect-ratio: 1; background: rgba(255,255,255,.92); border-radius: 11px; background-image: repeating-linear-gradient(45deg, #f3f3f5 0 6px, #eaeaee 6px 12px);"></div>
+        <div style="flex: 1; aspect-ratio: 1; background: rgba(255,255,255,.92); border-radius: 11px; background-image: repeating-linear-gradient(45deg, #f3f3f5 0 6px, #eaeaee 6px 12px);"></div>
+        <div style="flex: 1; aspect-ratio: 1; background: rgba(255,255,255,.92); border-radius: 11px; background-image: repeating-linear-gradient(45deg, #f3f3f5 0 6px, #eaeaee 6px 12px);"></div>
+      </div>
+    </div>
+
+    <!-- Category pills -->
+    <div class="scroll" style="display: flex; gap: 8px; padding: 0 18px 13px; overflow-x: auto;">
+      <div style="flex: none; background: #15161a; color: #fff; font-weight: 700; font-size: 13px; padding: 8px 18px; border-radius: 20px;">Tutti</div>
+      <div style="flex: none; background: #fff; color: #494c54; font-weight: 600; font-size: 13px; padding: 8px 18px; border-radius: 20px; border: 1.5px solid #e6e8ec;">Moda</div>
+      <div style="flex: none; background: #fff; color: #494c54; font-weight: 600; font-size: 13px; padding: 8px 18px; border-radius: 20px; border: 1.5px solid #e6e8ec;">Uomo</div>
+      <div style="flex: none; background: #fff; color: #494c54; font-weight: 600; font-size: 13px; padding: 8px 18px; border-radius: 20px; border: 1.5px solid #e6e8ec;">Donna</div>
+      <div style="flex: none; background: #fff; color: #494c54; font-weight: 600; font-size: 13px; padding: 8px 18px; border-radius: 20px; border: 1.5px solid #e6e8ec;">Tech</div>
+    </div>
+
+    <!-- Sort row -->
+    <div style="display: flex; align-items: center; gap: 8px; padding: 0 18px 12px;">
+      <span style="font-size: 12px; color: #8a8d95; font-weight: 600;">Ordina:</span>
+      <div style="font-size: 12px; font-weight: 700; color: #15161a; background: #f1f2f4; padding: 5px 11px; border-radius: 14px;">Default</div>
+      <div style="font-size: 12px; font-weight: 600; color: #8a8d95; padding: 5px 10px; border-radius: 14px; border: 1.5px solid #e6e8ec;">€↑</div>
+      <div style="font-size: 12px; font-weight: 600; color: #8a8d95; padding: 5px 10px; border-radius: 14px; border: 1.5px solid #e6e8ec;">€↓</div>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 700; color: #15161a; padding: 5px 10px; border-radius: 14px; border: 1.5px solid #e6e8ec;">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7L3.3 11l.6-3.6L1.3 4.8l3.6-.5L6.5 1z" fill="#FFB400"/></svg>
+        4.5+
+      </div>
+    </div>
+
+    <!-- Product grid -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 11px; padding: 0 18px 16px;">
+
+      <!-- Card 1 -->
+      <div style="background: #fff; border-radius: 15px; box-shadow: 0 6px 18px rgba(20,22,26,.06); overflow: hidden;">
+        <div style="position: relative; aspect-ratio: 1; background: #f3f3f5; background-image: repeating-linear-gradient(45deg, #f0f0f3 0 8px, #e9e9ee 8px 16px);">
+          <div style="position: absolute; top: 8px; left: 8px; background: #FF2060; color: #fff; font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 12px; padding: 2px 7px; border-radius: 6px;">-40%</div>
+        </div>
+        <div style="padding: 9px 10px 11px;">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: .8px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 3px;">Moda</div>
+          <div style="font-size: 12.5px; font-weight: 600; line-height: 1.25; color: #1c1d22; height: 31px; overflow: hidden;">Felpa oversize con cappuccio</div>
+          <div style="display: flex; align-items: center; gap: 3px; margin: 5px 0 7px;">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7L3.3 11l.6-3.6L1.3 4.8l3.6-.5L6.5 1z" fill="#FFB400"/></svg>
+            <span style="font-size: 11px; font-weight: 700; color: #494c54;">4.8</span>
+            <span style="font-size: 10px; color: #b0b3ba;">(212)</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 18px; color: #FF2060;">17€</span>
+              <span style="font-size: 10px; color: #b0b3ba; text-decoration: line-through;">29€</span>
+            </div>
+            <div style="width: 27px; height: 27px; border-radius: 9px; background: #15161a; display: flex; align-items: center; justify-content: center;">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M1.5 6.5h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 (in cart) -->
+      <div style="background: #fff; border-radius: 15px; box-shadow: 0 6px 18px rgba(20,22,26,.06); overflow: hidden;">
+        <div style="position: relative; aspect-ratio: 1; background: #f3f3f5; background-image: repeating-linear-gradient(45deg, #f0f0f3 0 8px, #e9e9ee 8px 16px);">
+          <div style="position: absolute; top: 8px; right: 8px; width: 23px; height: 23px; border-radius: 50%; background: #16a34a; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 6px rgba(22,163,74,.4);">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.8l2.6 2.6L10.5 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+        <div style="padding: 9px 10px 11px;">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: .8px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 3px;">Tech</div>
+          <div style="font-size: 12.5px; font-weight: 600; line-height: 1.25; color: #1c1d22; height: 31px; overflow: hidden;">Auricolari wireless Pro ANC</div>
+          <div style="display: flex; align-items: center; gap: 3px; margin: 5px 0 7px;">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7L3.3 11l.6-3.6L1.3 4.8l3.6-.5L6.5 1z" fill="#FFB400"/></svg>
+            <span style="font-size: 11px; font-weight: 700; color: #494c54;">4.6</span>
+            <span style="font-size: 10px; color: #b0b3ba;">(89)</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 18px; color: #FF2060;">34€</span>
+            </div>
+            <div style="width: 27px; height: 27px; border-radius: 9px; background: #16a34a; display: flex; align-items: center; justify-content: center;">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.8l2.6 2.6L10.5 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="background: #fff; border-radius: 15px; box-shadow: 0 6px 18px rgba(20,22,26,.06); overflow: hidden;">
+        <div style="position: relative; aspect-ratio: 1; background: #f3f3f5; background-image: repeating-linear-gradient(45deg, #f0f0f3 0 8px, #e9e9ee 8px 16px);"></div>
+        <div style="padding: 9px 10px 11px;">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: .8px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 3px;">Donna</div>
+          <div style="font-size: 12.5px; font-weight: 600; line-height: 1.25; color: #1c1d22; height: 31px; overflow: hidden;">Borsa a tracolla in pelle vegana</div>
+          <div style="display: flex; align-items: center; gap: 3px; margin: 5px 0 7px;">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7L3.3 11l.6-3.6L1.3 4.8l3.6-.5L6.5 1z" fill="#FFB400"/></svg>
+            <span style="font-size: 11px; font-weight: 700; color: #494c54;">4.9</span>
+            <span style="font-size: 10px; color: #b0b3ba;">(341)</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 18px; color: #FF2060;">42€</span>
+            </div>
+            <div style="width: 27px; height: 27px; border-radius: 9px; background: #15161a; display: flex; align-items: center; justify-content: center;">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M1.5 6.5h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div style="background: #fff; border-radius: 15px; box-shadow: 0 6px 18px rgba(20,22,26,.06); overflow: hidden;">
+        <div style="position: relative; aspect-ratio: 1; background: #f3f3f5; background-image: repeating-linear-gradient(45deg, #f0f0f3 0 8px, #e9e9ee 8px 16px);"></div>
+        <div style="padding: 9px 10px 11px;">
+          <div style="font-size: 9px; font-weight: 700; letter-spacing: .8px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 3px;">Uomo</div>
+          <div style="font-size: 12.5px; font-weight: 600; line-height: 1.25; color: #1c1d22; height: 31px; overflow: hidden;">Sneakers running mesh traspirante</div>
+          <div style="display: flex; align-items: center; gap: 3px; margin: 5px 0 7px;">
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none"><path d="M6.5 1l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7L3.3 11l.6-3.6L1.3 4.8l3.6-.5L6.5 1z" fill="#FFB400"/></svg>
+            <span style="font-size: 11px; font-weight: 700; color: #494c54;">4.7</span>
+            <span style="font-size: 10px; color: #b0b3ba;">(156)</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: baseline; gap: 5px;">
+              <span style="font-family: 'Archivo Narrow', sans-serif; font-weight: 800; font-size: 18px; color: #FF2060;">55€</span>
+            </div>
+            <div style="width: 27px; height: 27px; border-radius: 9px; background: #15161a; display: flex; align-items: center; justify-content: center;">
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1.5v10M1.5 6.5h10" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 76px; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); border-top: 1px solid #f0f1f3; display: flex; align-items: flex-start; justify-content: space-around; padding: 11px 14px 0; z-index: 40;">
+    <!-- Home active -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6h-6v6H4a1 1 0 01-1-1v-9.5z" fill="#FF2060"/></svg>
+      <span style="font-size: 9px; font-weight: 700; color: #FF2060;">Home</span>
+    </div>
+    <!-- Search -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="7" stroke="#9a9da4" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="#9a9da4" stroke-width="2" stroke-linecap="round"/></svg>
+      <span style="font-size: 9px; font-weight: 600; color: #9a9da4;">Cerca</span>
+    </div>
+    <!-- Cart with badge -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px; position: relative;">
+      <div style="position: relative;">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.5l1.8 11.2a1.5 1.5 0 001.5 1.3h8.4a1.5 1.5 0 001.5-1.2L20.5 8H6.2" stroke="#9a9da4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="#9a9da4"/><circle cx="17.5" cy="20" r="1.4" fill="#9a9da4"/></svg>
+        <div style="position: absolute; top: -5px; right: -6px; background: #FF2060; color: #fff; font-size: 9px; font-weight: 800; min-width: 16px; height: 16px; border-radius: 8px; display: flex; align-items: center; justify-content: center; padding: 0 3px; border: 1.5px solid #fff;">2</div>
+      </div>
+      <span style="font-size: 9px; font-weight: 600; color: #9a9da4;">Carrello</span>
+    </div>
+    <!-- Package -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M12 2.5l8 4v11l-8 4-8-4v-11l8-4z" stroke="#9a9da4" stroke-width="2" stroke-linejoin="round"/><path d="M4 6.5l8 4 8-4M12 10.5v11" stroke="#9a9da4" stroke-width="2" stroke-linejoin="round"/></svg>
+      <span style="font-size: 9px; font-weight: 600; color: #9a9da4;">Ordini</span>
+    </div>
+    <!-- User -->
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#9a9da4" stroke-width="2"/><path d="M4.5 20.5c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5" stroke="#9a9da4" stroke-width="2" stroke-linecap="round"/></svg>
+      <span style="font-size: 9px; font-weight: 600; color: #9a9da4;">Profilo</span>
+    </div>
+  </div>
+
+  <!-- Home indicator -->
+  <div style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); width: 134px; height: 5px; background: #15161a; border-radius: 3px; z-index: 45;"></div>
+
+</div>
+</x-dc>
+</body>
+</html>

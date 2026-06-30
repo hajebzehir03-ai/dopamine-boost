@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Narrow:wght@600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+  body { background: #c9ccd2; display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: 'Archivo', sans-serif; }
+  .scroll::-webkit-scrollbar { display: none; }
+  .scroll { -ms-overflow-style: none; scrollbar-width: none; }
+  @keyframes cr-pulse { 0% { box-shadow: 0 0 0 0 rgba(255,32,96,.45); } 70% { box-shadow: 0 0 0 11px rgba(255,32,96,0); } 100% { box-shadow: 0 0 0 0 rgba(255,32,96,0); } }
+  @keyframes cr-dash { to { stroke-dashoffset: -16; } }
+  @keyframes cr-float { 0%,100% { transform: translate(-50%,-50%) translateY(0); } 50% { transform: translate(-50%,-50%) translateY(-4px); } }
+</style>
+</helmet>
+
+<div style="position: relative; width: 393px; height: 852px; background: #f6f6f8; border-radius: 54px; box-shadow: 0 40px 90px rgba(0,0,0,.35), 0 0 0 11px #1b1c20, 0 0 0 13px #2c2e34; overflow: hidden; font-family: 'Archivo', sans-serif; color: #15161a;">
+
+  <!-- Status bar -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 30px 9px; z-index: 40; background: #fff;">
+    <div style="font-size: 15px; font-weight: 700;">9:41</div>
+    <div style="display: flex; align-items: center; gap: 7px;">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none"><rect x="0" y="7" width="3" height="5" rx="1" fill="#15161a"/><rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#15161a"/><rect x="10" y="2" width="3" height="10" rx="1" fill="#15161a"/><rect x="15" y="0" width="3" height="12" rx="1" fill="#15161a" opacity=".35"/></svg>
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 2.5c2.3 0 4.4.9 6 2.4l1.2-1.3C13.8 1.7 11.3.7 8.5.7S3.2 1.7 1.3 3.6L2.5 4.9c1.6-1.5 3.7-2.4 6-2.4z" fill="#15161a"/><circle cx="8.5" cy="9.8" r="1.6" fill="#15161a"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3" stroke="#15161a" stroke-opacity=".4"/><rect x="2" y="2" width="16.5" height="8" rx="1.5" fill="#15161a"/><rect x="23" y="4" width="1.5" height="4" rx=".75" fill="#15161a" fill-opacity=".4"/></svg>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div style="position: absolute; top: 54px; left: 0; right: 0; height: 50px; display: flex; align-items: center; padding: 0 18px; background: #fff; border-bottom: 1px solid #f0f1f3; z-index: 30;">
+    <div style="width: 38px; height: 38px; border-radius: 50%; background: #f1f2f4; display: flex; align-items: center; justify-content: center;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="#15161a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <div style="flex: 1; text-align: center; font-size: 17px; font-weight: 700; margin-right: 38px;">Traccia ordine</div>
+  </div>
+
+  <!-- SCROLL -->
+  <div class="scroll" style="position: absolute; top: 104px; left: 0; right: 0; bottom: 0; overflow-y: auto; padding: 16px 18px 30px;">
+
+    <!-- Order + tracking code row -->
+    <div style="display: flex; gap: 11px; margin-bottom: 13px;">
+      <div style="flex: 1; background: #fff; border: 1px solid #f0f1f3; border-radius: 16px; padding: 13px 14px;">
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: .6px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 5px;">Ordine</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 14px; letter-spacing: .3px;">CR-2026-48721</div>
+        <div style="font-size: 11px; color: #8a8d95; margin-top: 3px;">30 giu 2026</div>
+      </div>
+    </div>
+
+    <!-- Tracking code card -->
+    <div style="background: #fff; border: 1px solid #f0f1f3; border-radius: 16px; padding: 13px 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 13px;">
+      <div>
+        <div style="font-size: 10px; font-weight: 700; letter-spacing: .6px; color: #b0b3ba; text-transform: uppercase; margin-bottom: 5px;">Codice tracking</div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; letter-spacing: .5px; color: #15161a;">CRTRK-7A8B9C2D1E</div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px; background: #f1f2f4; padding: 8px 12px; border-radius: 11px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2.5" stroke="#FF2060" stroke-width="2"/><path d="M16 8V5.5A1.5 1.5 0 0014.5 4H5.5A1.5 1.5 0 004 5.5v9A1.5 1.5 0 005.5 16H8" stroke="#FF2060" stroke-width="2" stroke-linecap="round"/></svg>
+        <span style="font-size: 12px; font-weight: 700; color: #FF2060;">Copia</span>
+      </div>
+    </div>
+
+    <!-- Current status hero card -->
+    <div style="background: linear-gradient(125deg, #FF2060 0%, #FF4D5A 60%, #FF7A1A 100%); border-radius: 20px; padding: 18px 18px 16px; margin-bottom: 13px; position: relative; overflow: hidden; box-shadow: 0 14px 30px rgba(255,40,90,.3);">
+      <div style="position: absolute; top: -28px; right: -22px; width: 120px; height: 120px; background: rgba(255,255,255,.12); border-radius: 50%;"></div>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 56px; height: 56px; border-radius: 16px; background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; flex: none;">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 2.5l8 4v11l-8 4-8-4v-11l8-4z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 6.5l8 4 8-4M12 10.5v11" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 700; letter-spacing: 1px; color: rgba(255,255,255,.85); text-transform: uppercase; margin-bottom: 3px;">Stato attuale</div>
+          <div style="font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -.3px;">In transito</div>
+          <div style="font-size: 13px; font-weight: 500; color: rgba(255,255,255,.9); margin-top: 2px;">Hub logistico Bologna</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 7px; margin-top: 15px; background: rgba(0,0,0,.16); padding: 8px 12px; border-radius: 11px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="2"/><path d="M12 7v5l3.5 2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size: 12px; font-weight: 600; color: #fff;">Consegna prevista</span>
+        <span style="font-size: 12px; font-weight: 800; color: #fff; margin-left: auto;">Domani, 1 lug</span>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div style="position: relative; height: 200px; border-radius: 20px; overflow: hidden; margin-bottom: 18px; border: 1px solid #e6e8ec; background: #e9efe6;">
+      <!-- water -->
+      <div style="position: absolute; inset: 0; background: linear-gradient(160deg, #dde7ec 0%, #e6efe8 40%, #e3ece6 100%);"></div>
+      <!-- landmass abstraction -->
+      <div style="position: absolute; left: -40px; top: -30px; width: 320px; height: 290px; background: #e7ede1; border-radius: 46% 54% 50% 50% / 40% 44% 56% 60%; transform: rotate(-8deg);"></div>
+      <div style="position: absolute; right: -60px; bottom: -50px; width: 200px; height: 200px; background: #eef2ea; border-radius: 50%;"></div>
+      <!-- faint roads -->
+      <svg width="100%" height="100%" viewBox="0 0 357 200" preserveAspectRatio="none" style="position: absolute; inset: 0;">
+        <path d="M-10 60 L120 90 L200 70 L380 120" stroke="#d4dcd0" stroke-width="2" fill="none"/>
+        <path d="M40 -10 L90 80 L70 210" stroke="#d4dcd0" stroke-width="2" fill="none"/>
+        <path d="M240 -10 L210 90 L260 210" stroke="#d4dcd0" stroke-width="2" fill="none"/>
+        <path d="M-10 150 L150 130 L360 60" stroke="#dfe6db" stroke-width="2" fill="none"/>
+      </svg>
+      <!-- route -->
+      <svg width="100%" height="100%" viewBox="0 0 357 200" preserveAspectRatio="none" style="position: absolute; inset: 0;">
+        <path d="M70 48 C 150 70, 180 120, 285 158" stroke="#FF2060" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-dasharray="2 8" style="animation: cr-dash 1s linear infinite; opacity:.55;"/>
+        <path d="M70 48 C 150 70, 180 120, 188 130" stroke="#FF2060" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+      </svg>
+      <!-- origin Milano -->
+      <div style="position: absolute; left: 70px; top: 48px; transform: translate(-50%,-50%);">
+        <div style="width: 13px; height: 13px; border-radius: 50%; background: #fff; border: 3.5px solid #15161a;"></div>
+      </div>
+      <div style="position: absolute; left: 70px; top: 26px; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: #15161a; background: rgba(255,255,255,.85); padding: 2px 6px; border-radius: 5px;">Milano</div>
+      <!-- destination Roma -->
+      <div style="position: absolute; left: 285px; top: 158px; transform: translate(-50%,-100%);">
+        <svg width="22" height="28" viewBox="0 0 22 28" fill="none"><path d="M11 27C11 27 20 17 20 10A9 9 0 002 10C2 17 11 27 11 27Z" fill="#15161a"/><circle cx="11" cy="10" r="3.4" fill="#fff"/></svg>
+      </div>
+      <div style="position: absolute; left: 285px; top: 162px; transform: translateX(-50%); font-size: 10px; font-weight: 700; color: #15161a; background: rgba(255,255,255,.85); padding: 2px 6px; border-radius: 5px;">Roma</div>
+      <!-- package marker (current, mid route) -->
+      <div style="position: absolute; left: 188px; top: 130px; animation: cr-float 2.2s ease-in-out infinite;">
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: #FF2060; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(255,32,96,.45); border: 3px solid #fff; animation: cr-pulse 1.8s infinite;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2.5l8 4v11l-8 4-8-4v-11l8-4z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 6.5l8 4 8-4M12 10.5v11" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <!-- attribution -->
+      <div style="position: absolute; bottom: 5px; right: 8px; font-size: 8px; color: #9aa39a; font-weight: 500;">© OpenStreetMap</div>
+    </div>
+
+    <!-- Timeline -->
+    <div style="background: #fff; border: 1px solid #f0f1f3; border-radius: 20px; padding: 20px 18px 8px;">
+      <div style="font-size: 14px; font-weight: 800; margin-bottom: 18px;">Cronologia spedizione</div>
+
+      <!-- step: done -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #16a34a; display: flex; align-items: center; justify-content: center; flex: none; z-index: 2;">
+            <svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.8l2.6 2.6L10.5 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="width: 2px; flex: 1; background: #16a34a; min-height: 26px;"></div>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: #15161a;">Confermato</div>
+          <div style="font-size: 12px; color: #8a8d95; margin-top: 2px;">30 giu · 14:02</div>
+        </div>
+      </div>
+
+      <!-- step: done -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #16a34a; display: flex; align-items: center; justify-content: center; flex: none; z-index: 2;">
+            <svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.8l2.6 2.6L10.5 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="width: 2px; flex: 1; background: #16a34a; min-height: 26px;"></div>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: #15161a;">In preparazione</div>
+          <div style="font-size: 12px; color: #8a8d95; margin-top: 2px;">30 giu · 16:40</div>
+        </div>
+      </div>
+
+      <!-- step: done -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #16a34a; display: flex; align-items: center; justify-content: center; flex: none; z-index: 2;">
+            <svg width="14" height="14" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.8l2.6 2.6L10.5 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div style="width: 2px; flex: 1; background: linear-gradient(#16a34a, #FF2060); min-height: 26px;"></div>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 700; color: #15161a;">Spedito</div>
+          <div style="font-size: 12px; color: #8a8d95; margin-top: 2px;">1 lug · 08:15 · Milano</div>
+        </div>
+      </div>
+
+      <!-- step: current -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #FF2060; display: flex; align-items: center; justify-content: center; flex: none; z-index: 2; animation: cr-pulse 1.8s infinite;">
+            <div style="width: 9px; height: 9px; border-radius: 50%; background: #fff;"></div>
+          </div>
+          <div style="width: 2px; flex: 1; background: #e6e8ec; min-height: 26px;"></div>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 800; color: #FF2060;">In transito</div>
+          <div style="font-size: 12px; color: #8a8d95; margin-top: 2px;">1 lug · 13:20 · Hub Bologna</div>
+        </div>
+      </div>
+
+      <!-- step: future -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2px solid #e6e8ec; flex: none; z-index: 2;"></div>
+          <div style="width: 2px; flex: 1; background: #e6e8ec; min-height: 26px;"></div>
+        </div>
+        <div style="padding-bottom: 20px;">
+          <div style="font-size: 14px; font-weight: 600; color: #b0b3ba;">In consegna</div>
+          <div style="font-size: 12px; color: #c4c7cd; margin-top: 2px;">Previsto 2 lug</div>
+        </div>
+      </div>
+
+      <!-- step: future last -->
+      <div style="display: flex; gap: 14px; position: relative;">
+        <div style="display: flex; flex-direction: column; align-items: center;">
+          <div style="width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2px solid #e6e8ec; flex: none; z-index: 2;"></div>
+        </div>
+        <div style="padding-bottom: 12px;">
+          <div style="font-size: 14px; font-weight: 600; color: #b0b3ba;">Consegnato</div>
+          <div style="font-size: 12px; color: #c4c7cd; margin-top: 2px;">Previsto 2 lug</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 14px;"></div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

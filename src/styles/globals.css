@@ -8,11 +8,11 @@
   --color-primary-hover: #E0004A;
   --color-accent: #FFDE07;
   --color-background: #FFFFFF;
-  --color-background-secondary: #FFF5F7;
+  --color-background-secondary: #F3F3F5;
   --color-card: #FFFFFF;
-  --color-text: #1A1A1A;
-  --color-text-muted: #888888;
-  --color-border: #F0F0F0;
+  --color-text: #15161A;
+  --color-text-muted: #767676;
+  --color-border: #E6E8EC;
   --color-success: #00C853;
   --color-error: #FF2060;
   --color-flash: #FF6B00;
@@ -22,6 +22,14 @@
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-xl: 12px;
+
+  /* ─── Depth & blur system ─── */
+  --card-shadow: 0 6px 18px rgba(20,22,26,.06);
+  --card-border: none;
+  --flash-shadow: 0 12px 24px rgba(255,40,90,.28);
+  --nav-bg: rgba(255,255,255,0.9);
+  --nav-border: 0.5px solid rgba(0,0,0,0.1);
+  --header-blur-bg: rgba(255,255,255,0.85);
 }
 
 /* ─── Base ─── */
@@ -46,21 +54,11 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
-  transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
 
 /* ─── Scrollbar ─── */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 2px;
-}
+::-webkit-scrollbar { width: 0; }
 
 /* ─── Theme-aware utilities ─── */
 .bg-primary { background-color: var(--color-primary); }
@@ -79,54 +77,109 @@ body {
   border-radius: var(--radius-md);
   transition: background-color 0.15s ease, transform 0.1s ease;
 }
-.btn-primary:hover {
-  background-color: var(--color-primary-hover);
-  transform: translateY(-1px);
-}
-.btn-primary:active {
-  transform: translateY(0);
-}
+.btn-primary:hover { background-color: var(--color-primary-hover); transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
 
+/* ─── Card — depth via shadow, no border by default ─── */
 .card {
   background-color: var(--color-card);
-  border: 1px solid var(--color-border);
+  border: var(--card-border);
   border-radius: var(--radius-lg);
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ─── Bottom nav — blur glass ─── */
+.bottom-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--nav-bg);
+  border-top: var(--nav-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Header blur (applied when scrolled) ─── */
+.header-blur {
+  background: var(--header-blur-bg) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 /* ─── Product grid ─── */
 .product-grid {
   display: grid;
   grid-template-columns: repeat(var(--grid-mobile, 2), 1fr);
-  gap: 12px;
+  gap: 11px;
 }
 
 @media (min-width: 768px) {
   .product-grid {
     grid-template-columns: repeat(var(--grid-desktop, 4), 1fr);
-    gap: 20px;
+    gap: 16px;
   }
 }
 
 /* ─── Theme transitions ─── */
 body,
 .card,
-.bg-card,
-.bg-background,
-.bg-secondary,
 .bottom-nav,
 .btn-primary {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* ─── Glovo dark theme overrides ─── */
+/* ─── Glovo dark theme ─── */
 [data-theme="glovo"] {
   color-scheme: dark;
+  --card-shadow: 0 8px 22px rgba(0,0,0,.3);
+  --card-border: 1px solid rgba(255,255,255,.06);
+  --flash-shadow: 0 14px 30px rgba(255,107,0,.35);
+  --nav-bg: rgba(20,20,20,0.92);
+  --nav-border: 0.5px solid #2c2c2c;
+  --header-blur-bg: rgba(26,26,26,0.88);
 }
 
-/* ─── Minimal theme overrides ─── */
+/* Glovo: cards get subtle gradient on hover */
+[data-theme="glovo"] .card:hover {
+  background: linear-gradient(135deg, var(--color-card), rgba(255,107,0,.03));
+}
+
+/* ─── Minimal theme ─── */
+[data-theme="minimal"] {
+  --card-shadow: none;
+  --card-border: none;
+  --flash-shadow: none;
+  --nav-bg: rgba(255,255,255,1);
+  --nav-border: 0.5px solid #f0eee9;
+  --header-blur-bg: rgba(255,255,255,0.95);
+  --color-background-secondary: #F4F2EE;
+}
+
+/* Minimal: 1 column with generous spacing + dividers */
 [data-theme="minimal"] .product-grid {
-  gap: 32px;
+  gap: 0;
+}
+
+[data-theme="minimal"] .product-grid-item {
+  padding-top: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="minimal"] .product-grid-item:first-child {
+  padding-top: 0;
+}
+
+[data-theme="minimal"] .product-grid-item:last-child {
+  border-bottom: none;
+}
+
+/* Minimal search: underline only */
+[data-theme="minimal"] .search-input {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
+  padding-left: 28px !important;
 }
 
 /* ─── Skeleton loading ─── */
@@ -142,13 +195,8 @@ body,
   100% { background-position: -200% 0; }
 }
 
-/* ─── Leaflet map overrides ─── */
+/* ─── Leaflet map ─── */
 .leaflet-container {
   border-radius: var(--radius-lg);
   z-index: 0;
-}
-
-/* ─── Bottom nav safe area ─── */
-.bottom-nav {
-  padding-bottom: env(safe-area-inset-bottom, 0px);
 }

@@ -21,7 +21,7 @@ export function App() {
   const hideNav = HIDE_NAV_ROUTES.some((r) => location.pathname.startsWith(r))
 
   return (
-    <div className="min-h-screen bg-[var(--color-background)] max-w-lg mx-auto relative">
+    <div className="min-h-screen bg-[var(--color-background)] max-w-lg mx-auto relative" style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}>
       <Suspense fallback={<LoadingSpinner />}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>

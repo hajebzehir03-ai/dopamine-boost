@@ -35,34 +35,56 @@ export function FlashSaleBanner({ products, onProductClick }: FlashSaleBannerPro
     <motion.div
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-r from-[var(--color-flash)] to-[var(--color-primary)] text-white rounded-[var(--radius-xl)] p-4 mb-4"
+      className="relative overflow-hidden text-white p-[14px] mb-1"
+      style={{
+        background: 'linear-gradient(120deg, var(--color-primary) 0%, #FF3D5A 45%, var(--color-flash) 100%)',
+        borderRadius: '18px',
+        boxShadow: 'var(--flash-shadow)',
+      }}
     >
+      {/* Decorative circle */}
+      <div
+        className="absolute -top-8 -right-5 w-[110px] h-[110px] rounded-full pointer-events-none"
+        style={{ background: 'rgba(255,255,255,0.12)' }}
+      />
+
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Zap size={20} className="flash-blink" fill="currentColor" />
+          <Zap size={18} fill="white" stroke="none" />
           <div>
-            <p className="font-bold text-sm uppercase tracking-wider">Flash Sale</p>
-            <p className="text-xs opacity-80">Fino a -70% su prodotti selezionati</p>
+            <p className="font-bold text-[16px] uppercase tracking-[0.3px]">Flash Sale</p>
+            <p className="text-[11px] font-semibold opacity-80">Fino a -70% su prodotti selezionati</p>
           </div>
         </div>
         <div className="text-right">
-          <p className="text-[10px] uppercase opacity-80 mb-0.5">Scade tra</p>
-          <p className="font-mono font-bold text-lg tabular-nums">{countdown}</p>
+          <p className="text-[11px] uppercase opacity-80 mb-0.5 font-semibold">Finisce tra</p>
+          <p
+            className="font-bold text-[16px] tabular-nums px-[9px] py-[3px] rounded-[7px]"
+            style={{ fontFamily: '"JetBrains Mono", monospace', background: 'rgba(0,0,0,0.18)', letterSpacing: '1px' }}
+          >
+            {countdown}
+          </p>
         </div>
       </div>
 
-      <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+      <div className="flex gap-2 overflow-x-auto -mx-1 px-1 pb-0.5 no-scrollbar">
         {products.slice(0, 6).map((p) => (
           <button
             key={p.id}
             onClick={() => onProductClick(p.id)}
-            className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-[var(--radius-md)] p-2 w-20 text-center hover:bg-white/30 transition-colors"
+            className="flex-shrink-0 rounded-[11px] p-2 w-[72px] text-center hover:bg-white/30 transition-colors"
+            style={{ background: 'rgba(255,255,255,0.92)' }}
           >
-            <div className="w-12 h-12 mx-auto mb-1">
+            <div className="w-10 h-10 mx-auto mb-1">
               <LazyImage src={p.image} alt={p.title} />
             </div>
-            <p className="text-[10px] font-bold">{formatEuro(p.price)}</p>
-            <p className="text-[10px] bg-white/30 rounded px-1">-{p.discount}%</p>
+            <p className="text-[10px] font-bold text-[var(--color-text)]">{formatEuro(p.price)}</p>
+            <p
+              className="text-[10px] font-bold mt-0.5 text-white px-1 rounded-[4px]"
+              style={{ background: 'var(--color-primary)' }}
+            >
+              -{p.discount}%
+            </p>
           </button>
         ))}
       </div>

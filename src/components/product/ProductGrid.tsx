@@ -37,13 +37,14 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
   return (
     <div className="product-grid">
       {products.map((p) => (
-        <ProductCard
-          key={p.id}
-          product={p}
-          themeName={themeName}
-          inCart={isInCart(p.id)}
-          onAdd={add}
-        />
+        <div key={p.id} className="product-grid-item">
+          <ProductCard
+            product={p}
+            themeName={themeName}
+            inCart={isInCart(p.id)}
+            onAdd={add}
+          />
+        </div>
       ))}
     </div>
   )

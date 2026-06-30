@@ -1,5 +1,5 @@
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { useProducts } from '@/hooks/useProducts'
 import { SearchBar } from '@/components/common/SearchBar'
 import { ProductGrid } from '@/components/product/ProductGrid'
@@ -22,31 +22,49 @@ export function HomePage() {
   const navigate = useNavigate()
   const { themeName } = useThemeStore()
   const { products, flashSales, loading, error, filters, setFilters } = useProducts()
+  const [scrolled, setScrolled] = useState(false)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <div className="flex flex-col">
-      <BudgetBar />
+    <div ref={contentRef} className="flex flex-col">
 
-      <div className="px-4 py-4 space-y-4">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between"
-        >
-          <div>
-            <h1 className={`${themeName === 'shein' ? 'font-display text-4xl' : themeName === 'minimal' ? 'font-display text-3xl' : 'text-2xl font-bold'} text-[var(--color-text)] leading-none`}>
-              CartRush
-            </h1>
-            <p className="text-xs text-[var(--color-text-muted)] mt-1">Shopping senza conseguenze</p>
-          </div>
+      {/* ─── Sticky blur header ─── */}
+      <header
+        className={`sticky top-0 z-20 transition-all duration-200 ${scrolled ? 'header-blur shadow-sm' : 'bg-[var(--color-background)]'}`}
+      >
+        {/* Logo row */}
+        <div className="px-[18px] pt-2 pb-2 flex items-center justify-between">
+          <h1 className={`
+            leading-none text-[var(--color-text)]
+            ${themeName === 'shein' ? 'font-display text-[27px] tracking-tight' : ''}
+            ${themeName === 'glovo' ? 'text-[25px] font-extrabold' : ''}
+            ${themeName === 'minimal' ? 'font-display text-[26px] font-medium' : ''}
+          `}>
+            CartRush<span className="text-[var(--color-primary)]">.</span>
+          </h1>
           <StreakBadge />
-        </motion.div>
+        </div>
 
-        <SearchBar
-          value={filters.search}
-          onChange={(search) => setFilters({ ...filters, search })}
-        />
+        {/* Budget bar */}
+        <BudgetBar />
+
+        {/* Search */}
+        <div className="px-[18px] pb-3 pt-2">
+          <SearchBar
+            value={filters.search}
+            onChange={(search) => setFilters({ ...filters, search })}
+          />
+        </div>
+      </header>
+
+      {/* ─── Scrollable content ─── */}
+      <div className="px-[18px] pb-28 space-y-3">
 
         {/* Flash Sale */}
         {flashSales.length > 0 && !filters.search && (
@@ -57,33 +75,34 @@ export function HomePage() {
         )}
 
         {/* Categories */}
-        <div className="flex gap-2 overflow-x-auto pb-1 -mx-4 px-4">
+        <div className="flex gap-2 overflow-x-auto pb-1 -mx-[18px] px-[18px] no-scrollbar">
           {CATEGORIES.map((cat) => (
-            <motion.button
+            <button
               key={cat}
-              whileTap={{ scale: 0.95 }}
               onClick={() => setFilters({ ...filters, category: cat })}
               className={`
-                flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-semibold transition-colors
+                flex-shrink-0 px-[18px] py-2 rounded-full text-[13px] font-semibold transition-colors
                 ${filters.category === cat
-                  ? 'bg-[var(--color-primary)] text-white'
-                  : 'bg-[var(--color-background-secondary)] text-[var(--color-text-muted)]'}
+                  ? 'bg-[var(--color-text)] text-[var(--color-background)]'
+                  : 'bg-[var(--color-background-secondary)] text-[var(--color-text)] border border-[var(--color-border)]'}
               `}
             >
               {CATEGORY_LABELS[cat] ?? cat}
-            </motion.button>
+            </button>
           ))}
         </div>
 
         {/* Sort */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-[var(--color-text-muted)]">Ordina:</span>
+          <span className="text-[12px] text-[var(--color-text-muted)] font-semibold">Ordina:</span>
           {(['default', 'price-asc', 'price-desc', 'rating'] as const).map((s) => (
             <button
               key={s}
               onClick={() => setFilters({ ...filters, sortBy: s })}
-              className={`text-xs px-2 py-1 rounded transition-colors ${
-                filters.sortBy === s ? 'text-[var(--color-primary)] font-semibold' : 'text-[var(--color-text-muted)]'
+              className={`text-[12px] px-[11px] py-[5px] rounded-[14px] transition-colors font-semibold ${
+                filters.sortBy === s
+                  ? 'bg-[var(--color-background-secondary)] text-[var(--color-text)]'
+                  : 'text-[var(--color-text-muted)] border border-[var(--color-border)]'
               }`}
             >
               {{ default: 'Default', 'price-asc': '€↑', 'price-desc': '€↓', rating: 'Rating' }[s]}
@@ -100,8 +119,6 @@ export function HomePage() {
 
         {/* Products */}
         <ProductGrid products={products} loading={loading} />
-
-        <div className="h-24" />
       </div>
     </div>
   )

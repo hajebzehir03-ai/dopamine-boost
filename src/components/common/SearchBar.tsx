@@ -21,22 +21,16 @@ export function SearchBar({ value, onChange, placeholder = 'Cerca prodotti…' }
 
   return (
     <div className="relative">
-      <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]" />
+      <Search
+        size={16}
+        className="absolute left-[14px] top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] pointer-events-none"
+      />
       <input
         type="search"
         value={local}
         onChange={(e) => setLocal(e.target.value)}
         placeholder={placeholder}
-        className="
-          w-full pl-10 pr-4 py-2.5
-          bg-[var(--color-background-secondary)]
-          border border-[var(--color-border)]
-          rounded-[var(--radius-lg)]
-          text-[var(--color-text)]
-          placeholder:text-[var(--color-text-muted)]
-          focus:outline-none focus:border-[var(--color-primary)]
-          transition-colors
-        "
+        className="search-input w-full pl-[38px] pr-4 h-11 bg-[var(--color-background-secondary)] rounded-[13px] text-[14px] font-medium text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none border border-transparent focus:border-[var(--color-primary)] transition-colors"
       />
     </div>
   )
