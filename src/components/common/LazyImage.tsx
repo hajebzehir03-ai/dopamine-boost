@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useState, useEffect } from 'react'
 
 interface LazyImageProps {
   src: string
@@ -19,6 +19,8 @@ export const LazyImage = memo(function LazyImage({
 }: LazyImageProps) {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState(false)
+
+  useEffect(() => { setLoaded(false); setError(false) }, [src])
 
   return (
     <div className={`relative w-full h-full ${className}`}>

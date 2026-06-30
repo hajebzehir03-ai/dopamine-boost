@@ -5,13 +5,11 @@ import { useCart } from '@/hooks/useCart'
 import { CartItem } from '@/components/cart/CartItem'
 import { CartSummary } from '@/components/cart/CartSummary'
 import { Button } from '@/components/common/Button'
-import { shippingCost } from '@/utils/formatters'
 
 export function CartPage() {
   const navigate = useNavigate()
   const { items, totalPrice, clear } = useCart()
-  const shipping = shippingCost('standard')
-  const total = totalPrice + shipping
+  const total = totalPrice
 
   if (items.length === 0) {
     return (
@@ -45,7 +43,7 @@ export function CartPage() {
       </AnimatePresence>
 
       <div className="mt-4 mb-6">
-        <CartSummary subtotal={totalPrice} shipping={shipping} total={total} />
+        <CartSummary subtotal={totalPrice} total={total} />
       </div>
 
       <Button fullWidth size="lg" onClick={() => navigate('/checkout')}>

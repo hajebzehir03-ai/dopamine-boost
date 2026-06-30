@@ -27,7 +27,7 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
   if (products.length === 0) {
     return (
       <div className="text-center py-16 text-[var(--color-text-muted)]">
-        <p className="text-4xl mb-3">🛍️</p>
+        <p className="text-4xl mb-3">–</p>
         <p className="text-lg font-medium">Nessun prodotto trovato</p>
         <p className="text-sm">Prova con un'altra ricerca</p>
       </div>
