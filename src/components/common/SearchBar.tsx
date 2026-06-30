@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { Search } from 'lucide-react'
 
 interface SearchBarProps {
   value: string
@@ -13,7 +14,6 @@ export function SearchBar({ value, onChange, placeholder = 'Cerca prodotti…' }
   const isMounted = useRef(false)
 
   useEffect(() => {
-    // Skip the initial fire on mount — onChange already has the current value
     if (!isMounted.current) { isMounted.current = true; return }
     const t = setTimeout(() => onChangeRef.current(local), 350)
     return () => clearTimeout(t)
@@ -21,9 +21,7 @@ export function SearchBar({ value, onChange, placeholder = 'Cerca prodotti…' }
 
   return (
     <div className="relative">
-      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]">
-        🔍
-      </span>
+      <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)]" />
       <input
         type="search"
         value={local}

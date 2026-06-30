@@ -10,12 +10,12 @@ import { useThemeStore } from '@/stores/themeStore'
 
 const CATEGORIES = ['tutti', 'abbigliamento', "men's clothing", "women's clothing", 'electronics', 'jewelery']
 const CATEGORY_LABELS: Record<string, string> = {
-  tutti: '🛍️ Tutti',
-  'abbigliamento': '👗 Moda',
-  "men's clothing": '👔 Uomo',
-  "women's clothing": '👗 Donna',
-  electronics: '📱 Tech',
-  jewelery: '💎 Gioielli',
+  tutti: 'Tutti',
+  'abbigliamento': 'Moda',
+  "men's clothing": 'Uomo',
+  "women's clothing": 'Donna',
+  electronics: 'Tech',
+  jewelery: 'Gioielli',
 }
 
 export function HomePage() {
@@ -36,7 +36,7 @@ export function HomePage() {
         >
           <div>
             <h1 className={`${themeName === 'shein' ? 'font-display text-4xl' : themeName === 'minimal' ? 'font-display text-3xl' : 'text-2xl font-bold'} text-[var(--color-text)] leading-none`}>
-              CartRush⚡
+              CartRush
             </h1>
             <p className="text-xs text-[var(--color-text-muted)] mt-1">Shopping senza conseguenze</p>
           </div>
@@ -86,7 +86,7 @@ export function HomePage() {
                 filters.sortBy === s ? 'text-[var(--color-primary)] font-semibold' : 'text-[var(--color-text-muted)]'
               }`}
             >
-              {{ default: 'Default', 'price-asc': '€↑', 'price-desc': '€↓', rating: '⭐' }[s]}
+              {{ default: 'Default', 'price-asc': '€↑', 'price-desc': '€↓', rating: 'Rating' }[s]}
             </button>
           ))}
         </div>
@@ -94,7 +94,7 @@ export function HomePage() {
         {/* Error */}
         {error && (
           <div className="text-center py-8 text-[var(--color-error)]">
-            <p>❌ {error}</p>
+            <p>{error}</p>
           </div>
         )}
 

@@ -37,8 +37,18 @@ function normalizeDummyJSON(raw: Record<string, unknown>): Product {
   }
 }
 
+function seededShuffle(arr: Product[], seed: number): Product[] {
+  const copy = [...arr]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.abs(Math.sin(seed + i)) * (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
+}
+
 function injectFlashSales(products: Product[]): Product[] {
-  const candidates = [...products].sort(() => Math.random() - 0.5).slice(0, 5)
+  const daySeed = Math.floor(Date.now() / 86400000)
+  const candidates = seededShuffle(products, daySeed).slice(0, 5)
   const discounts = [30, 40, 50, 60, 70]
   return products.map((p) => {
     const idx = candidates.findIndex((c) => c.id === p.id)

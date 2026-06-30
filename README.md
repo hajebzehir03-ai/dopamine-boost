@@ -1,12 +1,12 @@
-# CartRush ⚡🛒
+# CartRush
 
-**La scarica di adrenalina dello shopping, senza spendere un centesimo.**
+**La scarica di dopamina dello shopping, senza spendere un centesimo.**
 
-CartRush è un "[dopamine site](https://www.fastcompany.com/91560432/dopamine-sites-fake-online-shopping-apps-let-you-pretend-to-buy-things-foodnevercomes)" — un'app di shopping virtuale dove puoi sfogliare prodotti reali, riempire il carrello, completare un checkout fittizio con confetti e suoni, e tracciare il tuo pacco su una mappa. Zero soldi spesi. Mai.
+CartRush è un'app di shopping virtuale dove puoi sfogliare prodotti reali, riempire il carrello, completare un checkout fittizio con confetti e suoni, e tracciare il tuo pacco su una mappa. Zero soldi spesi. Mai.
 
 La scienza: la dopamina si rilascia nell'*anticipazione* della ricompensa, non quando la ricevi. CartRush sfrutta esattamente questo.
 
-> **Live PWA:** [cartrushed.app](#) — nessun account, nessun download
+> **Live PWA:** [cartrush.netlify.app](https://cartrush.netlify.app) — nessun account, nessun download
 
 ---
 
@@ -14,14 +14,14 @@ La scienza: la dopamina si rilascia nell'*anticipazione* della ricompensa, non q
 
 | Feature | Dettaglio |
 |---------|-----------|
-| 🛍️ Catalogo reale | 1.000+ prodotti da FakeStoreAPI + DummyJSON con fallback automatico |
-| ⚡ Flash Sale | Banner con countdown reale, sconti fino a -70% (fittizi) |
-| 💳 Checkout immersivo | Indirizzo, pagamento, conferma ordine + 120 particelle confetti + haptic + ka-ching |
-| 📦 Tracking realistico | Mappa Leaflet + corriere animato + timeline a 6 step con timestamp simulati |
-| 🎨 3 temi visuali | Shein / Glovo / Minimal — CSS custom properties, switch in <300ms |
-| 🔥 Streak & Budget | Budget giornaliero €500 con reset mezzanotte, streak con badge emoji |
-| 🔒 Privacy by design | Tutto in localStorage, nessun dato inviato a server, tasto "Cancella dati" |
-| 📱 PWA installabile | Nessun app store, installa dal browser in 10 secondi |
+| Catalogo reale | 1.000+ prodotti da FakeStoreAPI + DummyJSON con fallback automatico |
+| Flash Sale | Banner con countdown reale, sconti fino a -70% (fittizi) |
+| Checkout immersivo | Indirizzo, pagamento, conferma ordine + 120 particelle confetti + haptic + ka-ching |
+| Tracking realistico | Mappa Leaflet + corriere animato + timeline a 6 step con timestamp simulati |
+| 3 temi visuali | Shein / Glovo / Minimal — CSS custom properties, switch in &lt;300ms |
+| Streak e Budget | Budget giornaliero 500€ con reset mezzanotte, streak con badge |
+| Privacy by design | Tutto in localStorage, nessun dato inviato a server, tasto "Cancella dati" |
+| PWA installabile | Nessun app store, installa dal browser in 10 secondi |
 
 ---
 
@@ -80,9 +80,9 @@ src/
 
 | Tema | Font | Colore | Feeling |
 |------|------|--------|---------|
-| **Shein** | Bebas Neue + DM Sans | #FF2060 | Grid densa, abbondanza, saldi |
-| **Glovo** | Outfit | #FF6B00 | Dark mode, delivery, notturno |
-| **Minimal** | Playfair Display + Jost | #C9A84C | Bianco puro, serif, premium |
+| Shein | Bebas Neue + DM Sans | #FF2060 | Grid densa, abbondanza, saldi |
+| Glovo | Outfit | #FF6B00 | Dark mode, delivery, notturno |
+| Minimal | Playfair Display + Jost | #C9A84C | Bianco puro, serif, premium |
 
 Ogni tema è un oggetto TypeScript in `src/styles/themes.ts` che sovrascrive CSS custom properties su `:root`. I componenti non hanno colori hardcodati.
 
@@ -100,13 +100,13 @@ Il progetto include `netlify.toml` con redirect SPA, cache headers e security he
 
 ---
 
-## Sicurezza & GDPR
+## Sicurezza e GDPR
 
-- **CSP** configurato in `index.html` (`script-src 'self'`, `connect-src` limitato alle API)
-- **SRI** su Leaflet CDN (`integrity` + `crossorigin`)
-- **localStorage only** — nessun dato trasmesso a server esterni
-- **Right to erasure** — tasto "Cancella tutti i dati" in Settings
-- **AdMob** (placeholder) — nota GDPR + TCF 2.0 reminder in `AdService.ts`
+- CSP configurato in `index.html` (`script-src 'self'`, `connect-src` limitato alle API)
+- SRI su Leaflet CDN (`integrity` + `crossorigin`)
+- localStorage only — nessun dato trasmesso a server esterni
+- Right to erasure — tasto "Cancella tutti i dati" in Settings
+- AdMob (placeholder) — nota GDPR + TCF 2.0 reminder in `AdService.ts`
 
 ---
 
@@ -126,4 +126,4 @@ MIT — vedi [LICENSE](./LICENSE)
 
 ## Autore
 
-**Zehir Hajeb** — [GitHub](https://github.com/hajebzehir03-ai) · built with [Claude Code](https://claude.ai/code)
+**Zehir Hajeb** — [GitHub](https://github.com/hajebzehir03-ai)

@@ -13,7 +13,7 @@ export function EsploraPage() {
         animate={{ opacity: 1 }}
         className="text-xl font-bold text-[var(--color-text)]"
       >
-        Esplora 🔍
+        Esplora
       </motion.h1>
 
       <SearchBar

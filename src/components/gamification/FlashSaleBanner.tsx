@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Zap } from 'lucide-react'
 import type { Product } from '@/types/product'
 import { formatEuro } from '@/utils/formatters'
+import { LazyImage } from '@/components/common/LazyImage'
 
 interface FlashSaleBannerProps {
   products: Product[]
@@ -37,7 +39,7 @@ export function FlashSaleBanner({ products, onProductClick }: FlashSaleBannerPro
     >
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className="text-xl flash-blink">⚡</span>
+          <Zap size={20} className="flash-blink" fill="currentColor" />
           <div>
             <p className="font-bold text-sm uppercase tracking-wider">Flash Sale</p>
             <p className="text-xs opacity-80">Fino a -70% su prodotti selezionati</p>
@@ -56,7 +58,9 @@ export function FlashSaleBanner({ products, onProductClick }: FlashSaleBannerPro
             onClick={() => onProductClick(p.id)}
             className="flex-shrink-0 bg-white/20 backdrop-blur-sm rounded-[var(--radius-md)] p-2 w-20 text-center hover:bg-white/30 transition-colors"
           >
-            <img src={p.image} alt={p.title} className="w-12 h-12 object-contain mx-auto mb-1" />
+            <div className="w-12 h-12 mx-auto mb-1">
+              <LazyImage src={p.image} alt={p.title} />
+            </div>
             <p className="text-[10px] font-bold">{formatEuro(p.price)}</p>
             <p className="text-[10px] bg-white/30 rounded px-1">-{p.discount}%</p>
           </button>

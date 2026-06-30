@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { ShoppingCart } from 'lucide-react'
 import { useCart } from '@/hooks/useCart'
 import { CartItem } from '@/components/cart/CartItem'
 import { CartSummary } from '@/components/cart/CartSummary'
@@ -15,10 +16,10 @@ export function CartPage() {
   if (items.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center pb-32">
-        <p className="text-6xl mb-4">🛒</p>
+        <ShoppingCart size={64} className="text-[var(--color-text-muted)] mb-4 opacity-30" />
         <h2 className="text-xl font-bold text-[var(--color-text)] mb-2">Il carrello è vuoto</h2>
         <p className="text-sm text-[var(--color-text-muted)] mb-6">Aggiungi qualcosa di bello!</p>
-        <Button onClick={() => navigate('/')}>🛍️ Inizia a fare shopping</Button>
+        <Button onClick={() => navigate('/')}>Inizia a fare shopping</Button>
       </div>
     )
   }
@@ -27,7 +28,7 @@ export function CartPage() {
     <div className="p-4 pb-32">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-xl font-bold text-[var(--color-text)]">
-          Il tuo carrello 🛒
+          Il tuo carrello
         </h1>
         <button
           onClick={clear}

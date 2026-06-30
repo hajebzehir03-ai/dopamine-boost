@@ -1,24 +1,34 @@
+import { useCallback } from 'react'
 import { useCartStore } from '@/stores/cartStore'
-import type { Product } from '@/types/product'
 
 export function useCart() {
-  const { items, addItem, removeItem, updateQuantity, clearCart, totalItems, totalPrice } = useCartStore()
+  const items = useCartStore(state => state.items)
+  const addItem = useCartStore(state => state.addItem)
+  const removeItem = useCartStore(state => state.removeItem)
+  const updateQuantity = useCartStore(state => state.updateQuantity)
+  const clearCart = useCartStore(state => state.clearCart)
 
-  const add = (product: Product, quantity = 1) => addItem(product, quantity)
+  const totalItems = items.reduce((acc, i) => acc + i.quantity, 0)
+  const totalPrice = items.reduce((acc, i) => acc + i.product.price * i.quantity, 0)
 
-  const isInCart = (productId: number) => items.some((i) => i.product.id === productId)
+  const isInCart = useCallback(
+    (productId: number) => items.some((i) => i.product.id === productId),
+    [items]
+  )
 
-  const getQuantity = (productId: number) =>
-    items.find((i) => i.product.id === productId)?.quantity ?? 0
+  const getQuantity = useCallback(
+    (productId: number) => items.find((i) => i.product.id === productId)?.quantity ?? 0,
+    [items]
+  )
 
   return {
     items,
-    add,
+    add: addItem,
     remove: removeItem,
     updateQty: updateQuantity,
     clear: clearCart,
-    totalItems: totalItems(),
-    totalPrice: totalPrice(),
+    totalItems,
+    totalPrice,
     isInCart,
     getQuantity,
   }

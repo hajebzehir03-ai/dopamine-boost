@@ -2,6 +2,7 @@ import type { Product } from '@/types/product'
 import { ProductCard } from './ProductCard'
 import { SkeletonCard } from '@/components/common/SkeletonCard'
 import { useThemeStore } from '@/stores/themeStore'
+import { useCart } from '@/hooks/useCart'
 
 interface ProductGridProps {
   products: Product[]
@@ -11,6 +12,7 @@ interface ProductGridProps {
 
 export function ProductGrid({ products, loading = false, skeletonCount = 8 }: ProductGridProps) {
   const { themeName } = useThemeStore()
+  const { add, isInCart } = useCart()
 
   if (loading) {
     return (
@@ -35,7 +37,13 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
   return (
     <div className="product-grid">
       {products.map((p) => (
-        <ProductCard key={p.id} product={p} themeName={themeName} />
+        <ProductCard
+          key={p.id}
+          product={p}
+          themeName={themeName}
+          inCart={isInCart(p.id)}
+          onAdd={add}
+        />
       ))}
     </div>
   )

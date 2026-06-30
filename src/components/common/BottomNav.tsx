@@ -1,17 +1,18 @@
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useCart } from '@/hooks/useCart'
+import { Home, Search, ShoppingCart, Package, User } from 'lucide-react'
+import { useCartStore } from '@/stores/cartStore'
 
 const navItems = [
-  { to: '/', label: 'Home', emoji: '🏠' },
-  { to: '/esplora', label: 'Esplora', emoji: '🔍' },
-  { to: '/carrello', label: 'Carrello', emoji: '🛒', badge: true },
-  { to: '/ordini', label: 'Ordini', emoji: '📦' },
-  { to: '/profilo', label: 'Profilo', emoji: '👤' },
+  { to: '/', label: 'Home', Icon: Home },
+  { to: '/esplora', label: 'Esplora', Icon: Search },
+  { to: '/carrello', label: 'Carrello', Icon: ShoppingCart, badge: true },
+  { to: '/ordini', label: 'Ordini', Icon: Package },
+  { to: '/profilo', label: 'Profilo', Icon: User },
 ]
 
 export function BottomNav() {
-  const { totalItems } = useCart()
+  const totalItems = useCartStore(state => state.items.reduce((acc, i) => acc + i.quantity, 0))
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-30 bg-[var(--color-card)] border-t border-[var(--color-border)] bottom-nav">
@@ -30,7 +31,7 @@ export function BottomNav() {
             {({ isActive }) => (
               <>
                 <div className="relative">
-                  <span className="text-xl leading-none">{item.emoji}</span>
+                  <item.Icon size={22} strokeWidth={isActive ? 2.5 : 1.8} />
                   {item.badge && totalItems > 0 && (
                     <AnimatePresence>
                       <motion.span

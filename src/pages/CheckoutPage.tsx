@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { Lock } from 'lucide-react'
 import { useCart } from '@/hooks/useCart'
 import { useBudgetStore } from '@/stores/budgetStore'
 import { useStreakStore } from '@/stores/streakStore'
@@ -30,6 +31,12 @@ export function CheckoutPage() {
   })
   const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('standard')
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card')
+
+  useEffect(() => {
+    if (items.length === 0) navigate('/carrello')
+  }, [items.length, navigate])
+
+  if (items.length === 0) return null
 
   const shipCost = shippingCost(shippingMethod)
   const total = totalPrice + shipCost
@@ -61,11 +68,6 @@ export function CheckoutPage() {
     navigate(`/conferma/${order.id}`)
   }
 
-  if (items.length === 0) {
-    navigate('/carrello')
-    return null
-  }
-
   return (
     <div className="p-4 pb-32">
       <motion.h1
@@ -73,7 +75,7 @@ export function CheckoutPage() {
         animate={{ opacity: 1 }}
         className="text-xl font-bold text-[var(--color-text)] mb-6"
       >
-        Checkout 💳
+        Checkout
       </motion.h1>
 
       <div className="space-y-6">
@@ -87,12 +89,13 @@ export function CheckoutPage() {
         <PaymentSelector value={paymentMethod} onChange={setPaymentMethod} />
 
         <div>
-          <h3 className="font-bold text-[var(--color-text)] mb-3">📋 Riepilogo ordine</h3>
+          <h3 className="font-bold text-[var(--color-text)] mb-3">Riepilogo</h3>
           <CartSummary subtotal={totalPrice} shipping={shipCost} total={total} />
         </div>
 
-        <div className="bg-[var(--color-background-secondary)] rounded-[var(--radius-lg)] p-3 text-xs text-[var(--color-text-muted)] text-center">
-          🔒 Nessun addebito reale. CartRush è solo per divertimento!
+        <div className="bg-[var(--color-background-secondary)] rounded-[var(--radius-lg)] p-3 text-xs text-[var(--color-text-muted)] text-center flex items-center justify-center gap-1.5">
+          <Lock size={12} />
+          Nessun costo, zero stress. Solo il piacere dello shopping.
         </div>
 
         <Button
@@ -101,7 +104,7 @@ export function CheckoutPage() {
           loading={loading}
           onClick={handleBuy}
         >
-          {loading ? 'Elaborazione in corso…' : '🛍️ ACQUISTA ORA'}
+          {loading ? 'Un momento...' : 'Conferma acquisto'}
         </Button>
       </div>
     </div>
