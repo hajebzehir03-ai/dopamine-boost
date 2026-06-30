@@ -1,6 +1,7 @@
 import type { Product } from '@/types/product'
 import { ProductCard } from './ProductCard'
 import { SkeletonCard } from '@/components/common/SkeletonCard'
+import { useThemeStore } from '@/stores/themeStore'
 
 interface ProductGridProps {
   products: Product[]
@@ -9,6 +10,8 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products, loading = false, skeletonCount = 8 }: ProductGridProps) {
+  const { themeName } = useThemeStore()
+
   if (loading) {
     return (
       <div className="product-grid">
@@ -31,8 +34,8 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
 
   return (
     <div className="product-grid">
-      {products.map((p, i) => (
-        <ProductCard key={p.id} product={p} index={i} />
+      {products.map((p) => (
+        <ProductCard key={p.id} product={p} themeName={themeName} />
       ))}
     </div>
   )

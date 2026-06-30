@@ -57,10 +57,18 @@ function injectFlashSales(products: Product[]): Product[] {
 
 class ProductServiceClass {
   private cache: Product[] | null = null
+  private pending: Promise<Product[]> | null = null
 
   async getAll(): Promise<Product[]> {
     if (this.cache) return this.cache
+    // Deduplicate concurrent calls: return the same in-flight promise
+    if (this.pending) return this.pending
 
+    this.pending = this._fetch().finally(() => { this.pending = null })
+    return this.pending
+  }
+
+  private async _fetch(): Promise<Product[]> {
     try {
       const res = await fetch(API_CONFIG.fakestoreapi.baseUrl + API_CONFIG.fakestoreapi.endpoints.products)
       if (!res.ok) throw new Error('FakeStore non disponibile')
@@ -69,11 +77,11 @@ class ProductServiceClass {
       this.cache = injectFlashSales(products)
       return this.cache
     } catch {
-      return this.getDummyJSON()
+      return this._fetchDummyJSON()
     }
   }
 
-  private async getDummyJSON(): Promise<Product[]> {
+  private async _fetchDummyJSON(): Promise<Product[]> {
     const res = await fetch(API_CONFIG.dummyjson.baseUrl + API_CONFIG.dummyjson.endpoints.products)
     if (!res.ok) throw new Error(`DummyJSON error: ${res.status}`)
     const data = await res.json() as { products?: Record<string, unknown>[] }
@@ -112,13 +120,13 @@ class ProductServiceClass {
 
     switch (filters.sortBy) {
       case 'price-asc':
-        products.sort((a, b) => a.price - b.price)
+        products = [...products].sort((a, b) => a.price - b.price)
         break
       case 'price-desc':
-        products.sort((a, b) => b.price - a.price)
+        products = [...products].sort((a, b) => b.price - a.price)
         break
       case 'rating':
-        products.sort((a, b) => b.rating.rate - a.rating.rate)
+        products = [...products].sort((a, b) => b.rating.rate - a.rating.rate)
         break
     }
 

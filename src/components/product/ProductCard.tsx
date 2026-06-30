@@ -1,21 +1,20 @@
-import { useState, useEffect, useRef } from 'react'
+import { memo, useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import type { Product } from '@/types/product'
+import type { ThemeName } from '@/types/theme'
 import { useCart } from '@/hooks/useCart'
-import { useThemeStore } from '@/stores/themeStore'
 import { formatEuro } from '@/utils/formatters'
 import { Badge } from '@/components/common/Badge'
 
 interface ProductCardProps {
   product: Product
-  index?: number
+  themeName: ThemeName
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ product, themeName }: ProductCardProps) {
   const navigate = useNavigate()
   const { add, isInCart } = useCart()
-  const { themeName } = useThemeStore()
   const [adding, setAdding] = useState(false)
   const inCart = isInCart(product.id)
   const addingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -108,4 +107,4 @@ export function ProductCard({ product }: ProductCardProps) {
       </div>
     </motion.div>
   )
-}
+})

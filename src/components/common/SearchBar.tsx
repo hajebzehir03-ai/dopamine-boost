@@ -10,8 +10,11 @@ export function SearchBar({ value, onChange, placeholder = 'Cerca prodotti…' }
   const [local, setLocal] = useState(value)
   const onChangeRef = useRef(onChange)
   onChangeRef.current = onChange
+  const isMounted = useRef(false)
 
   useEffect(() => {
+    // Skip the initial fire on mount — onChange already has the current value
+    if (!isMounted.current) { isMounted.current = true; return }
     const t = setTimeout(() => onChangeRef.current(local), 350)
     return () => clearTimeout(t)
   }, [local])
