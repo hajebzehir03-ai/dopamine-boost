@@ -28,7 +28,7 @@ export function TrackingPage() {
   return (
     <div className="pb-32">
       <div className="sticky top-0 z-10 bg-[var(--color-background)] px-4 py-3 border-b border-[var(--color-border)] flex items-center gap-3">
-        <button onClick={() => navigate(-1)} className="text-[var(--color-text-muted)] text-xl">←</button>
+        <button onClick={() => navigate(-1)} aria-label="Torna indietro" className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors text-xl leading-none">←</button>
         <h1 className="font-bold text-[var(--color-text)]">Traccia ordine</h1>
       </div>
 

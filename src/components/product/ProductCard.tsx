@@ -1,36 +1,19 @@
 import { memo, useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Check, Plus, Star } from 'lucide-react'
+import { Check, Plus } from 'lucide-react'
 import type { Product } from '@/types/product'
 import type { ThemeName } from '@/types/theme'
 import { formatEuro } from '@/utils/formatters'
 import { Badge } from '@/components/common/Badge'
 import { LazyImage } from '@/components/common/LazyImage'
+import { StarRating } from '@/components/product/StarRating'
 
 interface ProductCardProps {
   product: Product
   themeName: ThemeName
   inCart: boolean
   onAdd: (product: Product) => void
-}
-
-function StarRating({ rate, count }: { rate: number; count: number }) {
-  const filled = Math.round(rate)
-  return (
-    <div className="flex items-center gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          size={10}
-          className={i < filled
-            ? 'text-[var(--color-accent)] fill-[var(--color-accent)]'
-            : 'text-[var(--color-border)] fill-[var(--color-border)]'}
-        />
-      ))}
-      <span className="text-[10px] text-[var(--color-text-muted)] ml-1">({count})</span>
-    </div>
-  )
 }
 
 export const ProductCard = memo(function ProductCard({ product, themeName, inCart, onAdd }: ProductCardProps) {

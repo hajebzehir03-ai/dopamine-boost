@@ -51,7 +51,7 @@ export function TrackingMap({ route }: TrackingMapProps) {
           const offset = Math.sin(bounce) * 0.003
           const pos = marker.getLatLng()
           marker.setLatLng([pos.lat + offset, pos.lng])
-        }, 100)
+        }, 500)
 
         L.circleMarker(route.from, {
           radius: 8, color: '#00C853', fillColor: '#00C853', fillOpacity: 1,

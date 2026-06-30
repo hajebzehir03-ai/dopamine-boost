@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { Flame } from 'lucide-react'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { RelaxStats } from '@/components/gamification/RelaxStats'
 import { useBudget } from '@/hooks/useBudget'
@@ -10,7 +11,7 @@ const PERSIST_KEYS = ['cartrush-orders', 'cartrush-cart', 'cartrush-budget', 'ca
 
 export function SettingsPage() {
   const { remaining, total } = useBudget()
-  const { streak, emoji } = useStreak()
+  const { streak } = useStreak()
   const [confirmDelete, setConfirmDelete] = useState(false)
 
   function handleClearData() {
@@ -44,7 +45,7 @@ export function SettingsPage() {
             Budget oggi: {formatEuro(remaining)} / {formatEuro(total)}
           </p>
           {streak > 0 && (
-            <p className="text-sm text-[var(--color-primary)] font-semibold mt-0.5">{emoji} {streak} giorni di fila!</p>
+            <p className="text-sm text-[var(--color-primary)] font-semibold mt-0.5 flex items-center gap-1"><Flame size={14} aria-hidden="true" /> {streak} giorni di fila!</p>
           )}
         </div>
       </motion.div>

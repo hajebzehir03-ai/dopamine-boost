@@ -1,8 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { ArrowLeft, Check, ShoppingCart, Truck, RefreshCw } from 'lucide-react'
 import { useProduct } from '@/hooks/useProducts'
-import { useCart } from '@/hooks/useCart'
+import { useCartStore } from '@/stores/cartStore'
 import { Gallery } from '@/components/product/Gallery'
+import { StarRating } from '@/components/product/StarRating'
 import { Button } from '@/components/common/Button'
 import { Badge } from '@/components/common/Badge'
 import { formatEuro } from '@/utils/formatters'
@@ -11,8 +13,9 @@ export function ProductPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { product, loading } = useProduct(Number(id))
-  const { add, isInCart } = useCart()
-  const inCart = product ? isInCart(product.id) : false
+  const productId = product?.id ?? -1
+  const addItem = useCartStore(state => state.addItem)
+  const inCart = useCartStore(state => state.items.some(i => i.product.id === productId))
 
   if (loading) {
     return (
@@ -28,17 +31,11 @@ export function ProductPage() {
   if (!product) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
-        <p className="text-4xl mb-4">😔</p>
         <p className="text-[var(--color-text)] font-medium mb-4">Prodotto non trovato</p>
         <Button onClick={() => navigate('/')}>Torna alla home</Button>
       </div>
     )
   }
-
-  const images = [product.image, product.image]
-  const stars = Array.from({ length: 5 }, (_, i) =>
-    i < Math.round(product.rating.rate) ? '⭐' : '☆'
-  ).join('')
 
   return (
     <motion.div
@@ -50,30 +47,28 @@ export function ProductPage() {
       <div className="sticky top-0 z-10 bg-[var(--color-background)] px-4 py-3 border-b border-[var(--color-border)] flex items-center gap-3">
         <button
           onClick={() => navigate(-1)}
-          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] text-xl"
+          aria-label="Torna indietro"
+          className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] p-1 rounded-[var(--radius-sm)] transition-colors"
         >
-          ←
+          <ArrowLeft size={20} aria-hidden="true" />
         </button>
         <span className="text-sm font-medium text-[var(--color-text)] truncate">{product.category}</span>
       </div>
 
       <div className="p-4 space-y-5">
-        <Gallery images={images} alt={product.title} />
+        <Gallery images={[product.image]} alt={product.title} />
 
         {/* Badges */}
         <div className="flex gap-2 flex-wrap">
           <Badge variant="muted">{product.category}</Badge>
-          {product.isFlashSale && <Badge variant="flash">⚡ Flash Sale -{product.discount}%</Badge>}
+          {product.isFlashSale && <Badge variant="flash">Flash Sale -{product.discount}%</Badge>}
         </div>
 
         {/* Title */}
         <h1 className="text-xl font-bold text-[var(--color-text)] leading-tight">{product.title}</h1>
 
         {/* Rating */}
-        <div className="flex items-center gap-2">
-          <span className="text-base">{stars}</span>
-          <span className="text-sm text-[var(--color-text-muted)]">{product.rating.rate}/5 ({product.rating.count} recensioni)</span>
-        </div>
+        <StarRating rate={product.rating.rate} count={product.rating.count} size={14} />
 
         {/* Price */}
         <div className="flex items-baseline gap-3">
@@ -95,6 +90,7 @@ export function ProductPage() {
             {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
               <button
                 key={size}
+                aria-label={`Taglia ${size}`}
                 className="w-10 h-10 border border-[var(--color-border)] rounded-[var(--radius-md)] text-sm font-medium text-[var(--color-text)] hover:border-[var(--color-primary)] hover:text-[var(--color-primary)] transition-colors"
               >
                 {size}
@@ -105,8 +101,14 @@ export function ProductPage() {
 
         {/* Delivery info */}
         <div className="flex gap-4 text-sm text-[var(--color-text-muted)]">
-          <span>🚚 Spedizione gratis</span>
-          <span>↩️ Reso gratuito</span>
+          <span className="flex items-center gap-1.5">
+            <Truck size={14} aria-hidden="true" />
+            Spedizione gratis
+          </span>
+          <span className="flex items-center gap-1.5">
+            <RefreshCw size={14} aria-hidden="true" />
+            Reso gratuito
+          </span>
         </div>
       </div>
 
@@ -118,10 +120,14 @@ export function ProductPage() {
           variant={inCart ? 'secondary' : 'primary'}
           onClick={() => {
             if (inCart) navigate('/carrello')
-            else add(product)
+            else addItem(product)
           }}
         >
-          {inCart ? '✓ Nel carrello — Vai al carrello' : '🛒 Aggiungi al carrello'}
+          <span className="flex items-center justify-center gap-2">
+            {inCart
+              ? <><Check size={16} aria-hidden="true" /> Nel carrello — Vai al carrello</>
+              : <><ShoppingCart size={16} aria-hidden="true" /> Aggiungi al carrello</>}
+          </span>
         </Button>
       </div>
     </motion.div>

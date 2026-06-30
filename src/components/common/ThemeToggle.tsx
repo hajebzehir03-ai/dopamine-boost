@@ -16,6 +16,8 @@ export function ThemeToggle() {
             key={name}
             whileTap={{ scale: 0.92 }}
             onClick={() => setTheme(name)}
+            aria-pressed={isActive}
+            aria-label={`Tema ${t.label}`}
             className={`
               flex flex-col items-center gap-1 px-3 py-2 rounded-[var(--radius-lg)]
               border-2 transition-all duration-200
